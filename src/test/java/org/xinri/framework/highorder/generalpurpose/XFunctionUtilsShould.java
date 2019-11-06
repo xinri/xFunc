@@ -5,9 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import org.junit.Test;
-import org.xinri.framework.hightorder.generalpurpose.FunctionUtils;
 
-public class FunctionUtilsShould {
+public class XFunctionUtilsShould {
 
   @Test
   public void return_16_when_apply_with_curry_function() {
@@ -16,7 +15,7 @@ public class FunctionUtilsShould {
         (num, value) -> (num) + Integer.valueOf(value);
 
     // when
-    Integer result = FunctionUtils.curry(biFunc).apply(5).apply("11");
+    Integer result = XFunctionUtils.curry(biFunc).apply(5).apply("11");
 
     // when and then
     assertThat(result).isEqualTo(16);
@@ -29,7 +28,7 @@ public class FunctionUtilsShould {
         num -> value -> (num) + Integer.valueOf(value);
 
     // when
-    Integer result = FunctionUtils.unCurry(func).apply(5, "11");
+    Integer result = XFunctionUtils.unCurry(func).apply(5, "11");
 
     // when and then
     assertThat(result).isEqualTo(16);
@@ -42,7 +41,7 @@ public class FunctionUtilsShould {
         num -> value -> (num) + Integer.valueOf(value);
 
     // when
-    Integer result = FunctionUtils.flip(func).apply("11").apply(5);
+    Integer result = XFunctionUtils.flip(func).apply("11").apply(5);
 
     // when and then
     assertThat(result).isEqualTo(16);

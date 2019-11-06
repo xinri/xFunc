@@ -1,12 +1,12 @@
-package org.xinri.framework.hightorder.generalpurpose;
+package org.xinri.framework.highorder.generalpurpose;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import javax.annotation.Nonnull;
 
-public final class FunctionUtils {
+public final class XFunctionUtils {
 
-  private FunctionUtils() {
+  private XFunctionUtils() {
     throw new IllegalStateException("reflexion not allowed");
   }
 
@@ -17,9 +17,9 @@ public final class FunctionUtils {
    * @return a curry function
    */
   @Nonnull
-  public static <U, V, X> Function<U, Function<V, X>> curry(
-      @Nonnull BiFunction<U, V, X> biFuncToCurry) {
-    return u -> v -> biFuncToCurry.apply(u, v);
+  public static <R, T, U> Function<R, Function<T, U>> curry(
+      @Nonnull BiFunction<R, T, U> biFuncToCurry) {
+    return t -> u -> biFuncToCurry.apply(t, u);
   }
 
   /**
@@ -29,9 +29,9 @@ public final class FunctionUtils {
    * @return the bi function.
    */
   @Nonnull
-  public static <U, V, X> BiFunction<U, V, X> unCurry(
-      @Nonnull Function<U, Function<V, X>> funcToUnCurry) {
-    return (u, v) -> funcToUnCurry.apply(u).apply(v);
+  public static <R, T, U> BiFunction<R, T, U> unCurry(
+      @Nonnull Function<R, Function<T, U>> funcToUnCurry) {
+    return (t, u) -> funcToUnCurry.apply(t).apply(u);
   }
 
   /**
@@ -41,8 +41,8 @@ public final class FunctionUtils {
    * @return a function flipped to apply in the reverse order.
    */
   @Nonnull
-  public static <U, V, X> Function<V, Function<U, X>> flip(
-      @Nonnull Function<U, Function<V, X>> funcToFlip) {
-    return u -> v -> funcToFlip.apply(v).apply(u);
+  public static <R, T, U> Function<T, Function<R, U>> flip(
+      @Nonnull Function<R, Function<T, U>> funcToFlip) {
+    return t -> u -> funcToFlip.apply(u).apply(t);
   }
 }
